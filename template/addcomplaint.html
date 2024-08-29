@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Complaint</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #007bff;
+        }
+        .btn-custom {
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 50px;
+        }
+        .btn-custom:hover {
+            background-color: #0056b3;
+        }
+        .card-header {
+            background-color: #007bff;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow">
+                    <div class="card-header text-center">
+                        <h4>Add Complaint</h4>
+                    </div>
+                    <div class="card-body">
+                        <form action="#" method="POST">
+                            <div class="form-group">
+                                <label for="complaintTitle">Complaint Title</label>
+                                <input type="text" class="form-control" id="complaintTitle" name="complaintTitle" placeholder="Enter title" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="complaintCategory">Category</label>
+                                <select class="form-control" id="complaintCategory" name="complaintCategory" required>
+                                    <option value="" disabled selected>Select category</option>
+                                    <option value="Academic">Academic</option>
+                                    <option value="Administrative">Administrative</option>
+                                    <option value="Infrastructure">Infrastructure</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="complaintDetails">Complaint Details</label>
+                                <textarea class="form-control" id="complaintDetails" name="complaintDetails" rows="4" placeholder="Enter complaint details" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-custom btn-block">Submit Complaint</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
