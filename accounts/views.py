@@ -7,7 +7,7 @@ def open(request):
     return render(request, 'index.html')
 
 def registeropen(request):
-    return render(request, 'reg.html')
+    return render(request, 'stdreg.html')
 
 def adreg(request):
     return render(request, 'adminreg.html')
@@ -29,14 +29,14 @@ def log(request):
 
 def register(request):
     if request.method == "POST":
-        firstname = request.POST.get('fname')  # Field in table; variable to store
-        lastname = request.POST.get('lname')
+        name = request.POST.get('name')  # Field in table; variable to store
+        # lastname = request.POST.get('lname')
         department = request.POST.get('department')
-        phone = request.POST.get('phone')
+        # phone = request.POST.get('phone')
         mail = request.POST.get('mail')
         password = request.POST.get('password')
 
-        data = Registers.objects.create(fname=firstname, lname=lastname, department=department, phone=phone, mail=mail, password=password)
+        data = Registers.objects.create(name=name, department=department,mail=mail, password=password)
         data.save()
         messages.success(request, "Registration successful!")
     return render(request, "index.html")  # Function to access register fields
@@ -89,3 +89,7 @@ def logout(request):
 
 def addcomp(request):
     return render(request, 'addcomplaint.html')
+
+
+def stdhome(request):
+    return render(request, 'studenthome.html')

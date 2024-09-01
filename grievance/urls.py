@@ -22,7 +22,7 @@ from accounts import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.open),
-    path('reg', views.registeropen),
+    path('stdreg', views.registeropen),
     path('adminreg', views.adreg),
     path('sample', views.samp),
     path('shome', views.shome, name='shome'),  # Add this line for student home
@@ -30,7 +30,8 @@ urlpatterns = [
     path('about', views.indexabout),
     path('facreg', views.facultyreg),
     path('login', views.student_login, name='login'),
-    path('registration', views.register), #main registration
+    path('registration', views.register), #registration details to login
     path('logout', views.logout, name='logout'),  # Add this for logout
     path('addcomplaint', views.addcomp),
+    path('studenthome', views.stdhome),
 ]
