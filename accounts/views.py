@@ -64,21 +64,6 @@ def student_dashboard(request):
     else:
         return redirect('login')  # Redirect to login page if not logged in
     
-    # views.py
-def student_login(request):
-    if request.method == 'POST':
-        mail = request.POST.get('mail')  # Get email from form
-        password = request.POST.get('password')  # Get password from form
-
-        try:
-            user = Registers.objects.get(mail=mail, password=password)
-            request.session['user_id'] = user.id  # Store user ID in session
-            messages.success(request, "Login successful!")
-            return redirect('dashboard')  # Redirect to the student dashboard
-        except Registers.DoesNotExist:
-            messages.error(request, "Invalid credentials")
-
-    return render(request, 'login.html')
 
 # views.py
 def logout(request):
