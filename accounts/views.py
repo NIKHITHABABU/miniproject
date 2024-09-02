@@ -78,3 +78,17 @@ def addcomp(request):
 
 def stdhome(request):
     return render(request, 'studenthome.html')
+
+def complaint(request):
+    if request.method == "POST":
+        title = request.POST.get('ctitle')  # Field in table; variable to store
+        # lastname = request.POST.get('lname')
+        type= request.POST.get('ctype')
+        # phone = request.POST.get('phone')
+        description = request.POST.get('cdescription')
+        # password = request.POST.get('password')
+
+        data = complaints.objects.create(ctitle=title, ctype=type,cdescription=description)
+        data.save()
+        messages.success(request, "Registration successful!")
+    return render(request, "index.html")

@@ -34,4 +34,5 @@ urlpatterns = [
     path('logout', views.logout, name='logout'),  # Add this for logout
     path('addcomplaint', views.addcomp),
     path('studenthome', views.stdhome),
+    path('addcomplaints', views.complaint),
 ]

@@ -1,80 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Complaint</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Grievance Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
+            background: url('../static/css/assets/img/complaintcover.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #f8f9fa; /* Light color for text to contrast against dark background */
             font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
+            background-color: #000; /* Fallback for browsers that do not support images */
         }
+
         .container {
+            background-color: rgba(0, 0, 0, 0.7); /* Dark background with transparency */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            padding: 30px;
+            max-width: 600px;
             margin-top: 50px;
         }
-        .form-control:focus {
-            box-shadow: none;
+
+        h2 {
+            color: #007bff;
+            margin-bottom: 30px;
+        }
+
+        .form-group label {
+            color: #f8f9fa; /* Light color for labels to contrast against dark background */
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
             border-color: #007bff;
         }
-        .btn-custom {
-            background-color: #007bff;
-            color: #fff;
-            border-radius: 50px;
-        }
-        .btn-custom:hover {
+
+        .btn-primary:hover {
             background-color: #0056b3;
-        }
-        .card-header {
-            background-color: #007bff;
-            color: #fff;
+            border-color: #004085;
         }
     </style>
 </head>
-
 <body>
-
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card shadow">
-                    <div class="card-header text-center">
-                        <h4>Add Complaint</h4>
-                    </div>
-                    <div class="card-body">
-                        <form action="#" method="POST">
-                            <div class="form-group">
-                                <label for="complaintTitle">Complaint Title</label>
-                                <input type="text" class="form-control" id="complaintTitle" name="complaintTitle" placeholder="Enter title" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="complaintCategory">Category</label>
-                                <select class="form-control" id="complaintCategory" name="complaintCategory" required>
-                                    <option value="" disabled selected>Select category</option>
-                                    <option value="Academic">Academic</option>
-                                    <option value="Administrative">Administrative</option>
-                                    <option value="Infrastructure">Infrastructure</option>
-                                    <option value="Other">Other</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="complaintDetails">Complaint Details</label>
-                                <textarea class="form-control" id="complaintDetails" name="complaintDetails" rows="4" placeholder="Enter complaint details" required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-custom btn-block">Submit Complaint</button>
-                        </form>
-                    </div>
-                </div>
+    <div class="container mt-5">
+        <h2 class="text-center">Submit Your Grievance</h2>
+        <form>
+            <div class="form-group">
+                <label for="complaintTitle">Complaint Title</label>
+                <input type="text" class="form-control" id="complaintTitle" placeholder="Enter the title of your grievance" required>
             </div>
-        </div>
+            <div class="form-group">
+                <label for="grievanceType">Type of Grievance</label>
+                <select class="form-control" id="grievanceType" required>
+                    <option value="" disabled selected>Select type</option>
+                    <option value="Academic">Academic</option>
+                    <option value="Administrative">Administrative</option>
+                    <option value="Facility">Facility</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="complaintDescription">Description</label>
+                <textarea class="form-control" id="complaintDescription" rows="4" placeholder="Describe your grievance in detail" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+        </form>
     </div>
-
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-
 </html>
