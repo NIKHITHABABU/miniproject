@@ -3,6 +3,8 @@ from django.shortcuts import render,HttpResponse, redirect
 from django.contrib import messages
 from .models import Registers, Grievance, feedbackforms
 from .forms import GrievanceForm
+from django.contrib.auth.models import User,auth
+from django.contrib.auth.decorators import login_required
 
 def open(request):
     return render(request, 'index.html')
@@ -95,3 +97,28 @@ def stdfeedback(request):
         return render(request,'feedbacktemplate.html')
 
     return render(request,'feedbacktemplate.html')
+
+def adminlogin(request):
+    if request.method=="POST":
+        uname=request.POST["username"]
+        password=request.POST["password"]
+        user=auth.authenticate(username=uname,password=password,)
+        print(user)
+        if user is not None:
+            if (user.is_staff ) and (user.is_superuser):
+                print("true")
+                global is_admin_logged
+                is_admin_logged=True
+                auth.login(request,user)
+                return redirect('adminhome')
+   
+            else:
+                messages.info(request,'invalid credentials')
+                return redirect('adminhome')
+                # print("false")     
+        messages.info(request,'unauthorised user')
+
+    return render(request,'adminlogin.html')
+
+def ahome(request):
+    return render(request, 'adminhome.html')

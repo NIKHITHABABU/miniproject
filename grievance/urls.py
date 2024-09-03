@@ -19,4 +19,6 @@ urlpatterns = [
     path('studenthome', views.stdhome),
     path('addcomplaint', views.addcomp, name='addcomplaint'),
     path('feedbacktemplate/',views.stdfeedback,name="feedbacktemplate"),
+    path('adminlogin',views.adminlogin,name="adminlogin"),
+    path('ahome', views.ahome, name='adminhome'),
 ]
