@@ -17,5 +17,6 @@ urlpatterns = [
     path('registration', views.register),
     path('logout', views.logout, name='logout'),
     path('studenthome', views.stdhome),
-    path('addcomplaint', views.addcomp, name='addcomplaint'),  # Added path
+    path('addcomplaint', views.addcomp, name='addcomplaint'),
+    path('feedbacktemplate/',views.stdfeedback,name="feedbacktemplate"),
 ]

@@ -1,12 +1,13 @@
 # views.py
-from django.shortcuts import render, redirect
-from .models import Registers
-from .forms import GrievanceForm
+from django.shortcuts import render,HttpResponse, redirect
 from django.contrib import messages
+from .models import Registers, Grievance, feedbackforms
+from .forms import GrievanceForm
 
 def open(request):
     return render(request, 'index.html')
 
+# ... other existing views ...
 def registeropen(request):
     return render(request, 'stdreg.html')
 
@@ -79,3 +80,18 @@ def addcomp(request):
 
 def stdhome(request):
     return render(request, 'studenthome.html')
+
+def stdfeedback(request):
+
+    if request.method=="POST":
+
+        fname=request.POST["fname"]
+        lname=request.POST["lname"]
+        email=request.POST["email"]
+        message=request.POST["message"]
+        instance=feedbackforms.objects.create(fname=fname,lname=lname,email=email,message=message)
+        # instance.save()
+        # messages.info(request,'Feedback submitted successfully!')
+        return render(request,'feedbacktemplate.html')
+
+    return render(request,'feedbacktemplate.html')

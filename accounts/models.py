@@ -23,3 +23,12 @@ class Grievance(models.Model):
 
     def __str__(self):
         return self.complaint_title
+
+class feedbackforms(models.Model):
+    fname=models.CharField(max_length=200)
+    lname=models.CharField(max_length=300)
+    email=models.CharField(max_length=300)
+    message=models.CharField(max_length=300)
+
+    def __str__(self):
+        return self.fname
