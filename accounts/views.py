@@ -1,15 +1,13 @@
-# views.py
-from django.shortcuts import render,HttpResponse, redirect
+from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Registers, Grievance, feedbackforms
 from .forms import GrievanceForm
-from django.contrib.auth.models import User,auth
+from django.contrib.auth.models import User, auth
 from django.contrib.auth.decorators import login_required
 
 def open(request):
     return render(request, 'index.html')
 
-# ... other existing views ...
 def registeropen(request):
     return render(request, 'stdreg.html')
 
@@ -74,51 +72,52 @@ def addcomp(request):
         if form.is_valid():
             form.save()
             messages.success(request, "Grievance submitted successfully!")
-            return redirect('shome')  # Redirect to a page or return a success message
+            return redirect('shome')
     else:
         form = GrievanceForm()
-
     return render(request, 'addcomplaint.html', {'form': form})
 
 def stdhome(request):
     return render(request, 'studenthome.html')
 
 def stdfeedback(request):
-
-    if request.method=="POST":
-
-        fname=request.POST["fname"]
-        lname=request.POST["lname"]
-        email=request.POST["email"]
-        message=request.POST["message"]
-        instance=feedbackforms.objects.create(fname=fname,lname=lname,email=email,message=message)
-        # instance.save()
-        # messages.info(request,'Feedback submitted successfully!')
-        return render(request,'feedbacktemplate.html')
-
-    return render(request,'feedbacktemplate.html')
+    if request.method == "POST":
+        fname = request.POST["fname"]
+        lname = request.POST["lname"]
+        email = request.POST["email"]
+        message = request.POST["message"]
+        feedbackforms.objects.create(fname=fname, lname=lname, email=email, message=message)
+        messages.success(request, 'Feedback submitted successfully!')
+        return redirect('feedbacktemplate')
+    return render(request, 'feedbacktemplate.html')
 
 def adminlogin(request):
-    if request.method=="POST":
-        uname=request.POST["username"]
-        password=request.POST["password"]
-        user=auth.authenticate(username=uname,password=password,)
-        print(user)
-        if user is not None:
-            if (user.is_staff ) and (user.is_superuser):
-                print("true")
-                global is_admin_logged
-                is_admin_logged=True
-                auth.login(request,user)
-                return redirect('adminhome')
-   
-            else:
-                messages.info(request,'invalid credentials')
-                return redirect('adminhome')
-                # print("false")     
-        messages.info(request,'unauthorised user')
-
-    return render(request,'adminlogin.html')
+    if request.method == "POST":
+        uname = request.POST["username"]
+        password = request.POST["password"]
+        user = auth.authenticate(username=uname, password=password)
+        if user is not None and user.is_staff and user.is_superuser:
+            auth.login(request, user)
+            return redirect('adminhome')
+        else:
+            messages.error(request, 'Invalid credentials')
+    return render(request, 'adminlogin.html')
 
 def ahome(request):
     return render(request, 'adminhome.html')
+
+def ufeedbackform(request):
+    if request.method == "POST":
+        fname = request.POST["fname"]
+        lname = request.POST["lname"]
+        email = request.POST["email"]
+        message = request.POST["message"]
+        feedbackforms.objects.create(fname=fname, lname=lname, email=email, message=message)
+        messages.success(request, 'Feedback submitted successfully!')
+        return redirect('ufeedbackform')
+    return render(request, 'feedbacktemplate.html')
+
+# Admin Feedback Form Viewing
+def admfeedbform(request):
+    feedbacks = feedbackforms.objects.all()
+    return render(request, 'adminfeedbackview.html', {'feedbacks': feedbacks})

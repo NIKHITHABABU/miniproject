@@ -1,4 +1,3 @@
-# urls.py
 from django.contrib import admin
 from django.urls import path
 from accounts import views
@@ -18,7 +17,11 @@ urlpatterns = [
     path('logout', views.logout, name='logout'),
     path('studenthome', views.stdhome),
     path('addcomplaint', views.addcomp, name='addcomplaint'),
-    path('feedbacktemplate/',views.stdfeedback,name="feedbacktemplate"),
-    path('adminlogin',views.adminlogin,name="adminlogin"),
+    
+    # Feedback related URLs
+    path('feedbacktemplate/', views.stdfeedback, name="feedbacktemplate"),
+    path('adminlogin', views.adminlogin, name="adminlogin"),
     path('ahome', views.ahome, name='adminhome'),
+    path('ufeedbackform', views.ufeedbackform, name="ufeedbackform"),
+    path('adminfeedbackview', views.admfeedbform, name="admfeedbform"),
 ]
