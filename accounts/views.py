@@ -1,8 +1,9 @@
-from django.shortcuts import render, HttpResponse, redirect
-from django.contrib import messages
+# views.py
+from django.shortcuts import render, redirect
 from .models import Registers
+from .forms import GrievanceForm
+from django.contrib import messages
 
-# Existing views
 def open(request):
     return render(request, 'index.html')
 
@@ -29,66 +30,52 @@ def log(request):
 
 def register(request):
     if request.method == "POST":
-        name = request.POST.get('name')  # Field in table; variable to store
-        # lastname = request.POST.get('lname')
+        name = request.POST.get('name')
         department = request.POST.get('department')
-        # phone = request.POST.get('phone')
         mail = request.POST.get('mail')
         password = request.POST.get('password')
 
-        data = Registers.objects.create(name=name, department=department,mail=mail, password=password)
-        data.save()
+        Registers.objects.create(name=name, department=department, mail=mail, password=password)
         messages.success(request, "Registration successful!")
-    return render(request, "index.html")  # Function to access register fields
+    return render(request, "index.html")
 
-# New login view
 def student_login(request):
     if request.method == 'POST':
-        print("Form submitted")  # Debugging: Check if form is being submitted
-        mail = request.POST.get('mail')  # Get email from form
-        password = request.POST.get('password')  # Get password from form
+        mail = request.POST.get('mail')
+        password = request.POST.get('password')
 
         try:
             user = Registers.objects.get(mail=mail, password=password)
-            request.session['user_id'] = user.id  # Store user ID in session
+            request.session['user_id'] = user.id
             messages.success(request, "Login successful!")
-            return redirect('shome')  # Redirect to student home (change URL as needed)
+            return redirect('shome')
         except Registers.DoesNotExist:
             messages.error(request, "Invalid credentials")
 
     return render(request, 'login.html')
 
 def student_dashboard(request):
-    if 'user_id' in request.session:  # Check if the user is logged in
-        return render(request, 'student_dashboard.html')  # Render the dashboard page
+    if 'user_id' in request.session:
+        return render(request, 'student_dashboard.html')
     else:
-        return redirect('login')  # Redirect to login page if not logged in
-    
+        return redirect('login')
 
-# views.py
 def logout(request):
-    request.session.flush()  # Clear the session
+    request.session.flush()
     messages.success(request, "Logged out successfully.")
-    return redirect('login')  # Redirect to login page
-
+    return redirect('login')
 
 def addcomp(request):
-    return render(request, 'addcomplaint.html')
+    if request.method == 'POST':
+        form = GrievanceForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Grievance submitted successfully!")
+            return redirect('shome')  # Redirect to a page or return a success message
+    else:
+        form = GrievanceForm()
 
+    return render(request, 'addcomplaint.html', {'form': form})
 
 def stdhome(request):
     return render(request, 'studenthome.html')
-
-def complaint(request):
-    if request.method == "POST":
-        title = request.POST.get('ctitle')  # Field in table; variable to store
-        # lastname = request.POST.get('lname')
-        type= request.POST.get('ctype')
-        # phone = request.POST.get('phone')
-        description = request.POST.get('cdescription')
-        # password = request.POST.get('password')
-
-        data = complaints.objects.create(ctitle=title, ctype=type,cdescription=description)
-        data.save()
-        messages.success(request, "Registration successful!")
-    return render(request, "index.html")
