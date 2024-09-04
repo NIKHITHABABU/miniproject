@@ -1,107 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faculty Registration</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4; /* Light grey background */
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            width: 100%;
-            max-width: 600px;
-            margin: auto;
-            padding: 20px;
-            background-color: #ffffff; /* White background for the form */
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-top: 50px;
-        }
-        h2 {
-            text-align: center;
-            color: #007BFF; /* Blue color */
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            color: #333; /* Dark grey text color */
-        }
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        .form-group input:focus {
-            border-color: #007BFF;
-            outline: none;
-        }
-        .btn-register {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            background-color: #007BFF; /* Blue color */
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        .btn-register:hover {
-            background-color: #0056b3; /* Darker blue on hover */
-        }
-    </style>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registration Form</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="{% static 'fonts/material-icon/css/material-design-iconic-font.min.css' %}">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{% static 'css/assets/css/style3.css' %}">
 </head>
 <body>
-    <div class="container">
-        <h2>Faculty Registration</h2>
-        <form id="registrationForm">
-            <div class="form-group">
-                <label for="firstName">First Name:</label>
-                <input type="text" id="firstName" name="firstName" required>
+
+    <div class="main">
+
+        <!-- Sign In Form -->
+        <section class="sign-in">
+            <div class="container">
+                <div class="signin-content">
+                    <div class="signin-image">
+                        <figure><img src="{% static 'css/assets/img/signup-image.jpg' %}" alt="sign in image"></figure>
+                    </div>
+
+                    <div class="signin-form">
+                        <h2 class="form-title">Registration</h2>
+                        <form action="registration" method="post" onsubmit="return validateForm()">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" name="name" id="name" placeholder=" Name"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="department"><i class="zmdi zmdi-email"></i></label>
+                                <input type="text" name="department" id="department" placeholder=" Department"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="email"><i class="zmdi zmdi-email"></i></label>
+                                <input type="email" name="mail" id="mail" placeholder=" Email"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="password"><i class="zmdi zmdi-lock"></i></label>
+                                <input type="password" name="password" id="password" placeholder="Password"/>
+                            </div>
+                            <div class="form-group form-button">
+                                <input type="submit" class="form-submit" value="Register"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="lastName">Last Name:</label>
-                <input type="text" id="lastName" name="lastName" required>
-            </div>
-            <div class="form-group">
-                <label for="phoneNumber">Phone Number:</label>
-                <input type="tel" id="phoneNumber" name="phoneNumber" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit" class="btn-register">Register</button>
-        </form>
+        </section>
+
     </div>
 
+    <!-- JavaScript -->
+    <script src="{% static 'css/assets/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'css/assets/js/main1.js' %}"></script>
+
+    <!-- JavaScript Form Validation -->
     <script>
-        document.getElementById('registrationForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent form from submitting the traditional way
+        function validateForm() {
+            // Get form values
+            var name = document.getElementById("name").value;
+            var department = document.getElementById("department").value;
+            var email = document.getElementById("mail").value;
+            var password = document.getElementById("password").value;
 
-            // Capture form data
-            const formData = new FormData(event.target);
-            const data = {};
-            formData.forEach((value, key) => {
-                data[key] = value;
-            });
+            // Name validation: Check if the name field is not empty and contains only letters and spaces
+            var namePattern = /^[a-zA-Z\s]+$/;
+            if (name == "") {
+                alert("Please enter your name.");
+                return false;
+            } else if (!namePattern.test(name)) {
+                alert("Name should contain only letters and spaces.");
+                return false;
+            }
 
-            // You can now use `data` to send to a server or handle it as needed
-            console.log('Form Data Submitted:', data);
-        });
+            // Department validation: Check if the department field is not empty and contains only letters and spaces
+            if (department == "") {
+                alert("Please enter your department.");
+                return false;
+            } else if (!namePattern.test(department)) {  // Using the same pattern as for name
+                alert("Department should contain only letters and spaces.");
+                return false;
+            }
+
+            // Email validation with Gmail-specific regular expression
+            var emailPattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+            if (email == "") {
+                alert("Please enter your email.");
+                return false;
+            } else if (!emailPattern.test(email)) {
+                alert("Please enter a valid Gmail address (e.g., name@gmail.com).");
+                return false;
+            }
+
+            // Password validation
+            if (password == "") {
+                alert("Please enter your password.");
+                return false;
+            } else if (password.length < 6) {
+                alert("Password must be at least 6 characters long.");
+                return false;
+            }
+
+            // If all validations pass, allow form submission
+            return true;
+        }
     </script>
 </body>
 </html>

@@ -10,7 +10,7 @@
     <title>Login Form</title>
     <link rel="stylesheet" href="{% static 'css/assets/css/style2.css' %}" />
 </head>
-
+</head>
 <body>
     <div class="container">
         <form action="{% url 'login' %}" method="POST">
@@ -19,14 +19,16 @@
 
             <!-- Email Field -->
             <div class="input-field">
-                <label for="mail">Enter email</label>  <!-- Associated label -->
-                <input type="text" id="mail" name="mail" required />  <!-- Matching id -->
+                <input type="text" name="mail" required />  <!-- Matching id -->
+                <label>Enter email</label>  <!-- Associated label -->
+               
             </div>
 
             <!-- Password Field -->
             <div class="input-field">
-                <label for="password">Enter password</label>  <!-- Associated label -->
-                <input type="password" id="password" name="password" required />  <!-- Matching id -->
+                <input type="password" name="password" required />  <!-- Matching id -->
+                <label>Enter password</label>  <!-- Associated label -->
+               
             </div>
 
             <div class="forget">
@@ -34,6 +36,7 @@
                     <input type="checkbox" id="Save-login" />
                     <p>Save login information</p>
                 </label>
+                <a href="#">Forgot password?</a>
             </div>
 
             <button type="submit">Log In</button>

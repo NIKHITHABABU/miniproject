@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,HttpResponse
 from django.contrib import messages
 from .models import Registers, Grievance, feedbackforms
 from .forms import GrievanceForm
 from django.contrib.auth.models import User, auth
 from django.contrib.auth.decorators import login_required
+# from django.contrib.auth import authenticate, login
 
 def open(request):
     return render(request, 'index.html')
@@ -64,7 +65,7 @@ def student_dashboard(request):
 def logout(request):
     request.session.flush()
     messages.success(request, "Logged out successfully.")
-    return redirect('login')
+    return redirect('index')
 
 def addcomp(request):
     if request.method == 'POST':
@@ -121,3 +122,24 @@ def ufeedbackform(request):
 def admfeedbform(request):
     feedbacks = feedbackforms.objects.all()
     return render(request, 'adminfeedbackview.html', {'feedbacks': feedbacks})
+
+
+def faculty_login(request):
+    if request.method == 'POST':
+        mail = request.POST.get('mail')
+        password = request.POST.get('password')
+
+        try:
+            user = Registers.objects.get(mail=mail, password=password)
+            request.session['user_id'] = user.id
+            messages.success(request, "Login successful!")
+            return redirect('shome')
+        except Registers.DoesNotExist:
+            messages.error(request, "Invalid credentials")
+    
+    # Return the login form for GET requests
+    return render(request, 'facultylogin.html')
+
+
+def indexcontact(request):
+    return render(request, 'contact.html')
