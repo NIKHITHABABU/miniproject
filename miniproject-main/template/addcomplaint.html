@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Grievance</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background: url('../static/css/assets/img/complaintcover.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #f8f9fa;
+        }
+        .container {
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 8px;
+            padding: 30px;
+            max-width: 600px;
+            margin-top: 50px;
+        }
+        h2 {
+            color: #007bff;
+            margin-bottom: 30px;
+        }
+        .form-group label {
+            color: #f8f9fa;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Submit Your Grievance</h2>
+        <form method="POST">
+            {% csrf_token %}
+            
+            <!-- Name Field (Optional) -->
+            <div class="form-group">
+                <label for="name">Name (Optional):</label>
+                <input type="text" class="form-control" name="name" id="name">
+            </div>
+
+            <!-- Department Field (Optional) -->
+            <div class="form-group">
+                <label for="department">Department (Optional):</label>
+                <input type="text" class="form-control" name="department" id="department" pattern="[A-Za-z\s]+" title="Only alphabets allowed">
+            </div>
+
+            <!-- Grievance Title Field -->
+            <div class="form-group">
+                <label for="complaint_title">Grievance Title:</label>
+                <input type="text" class="form-control" name="complaint_title" id="complaint_title" required>
+            </div>
+
+            <!-- Grievance Type Field -->
+            <div class="form-group">
+                <label for="type_of_grievance">Grievance Type:</label>
+                <select class="form-control" name="type_of_grievance" id="type_of_grievance" required>
+                    <option value="academic">Academic</option>
+                    <option value="administrative">Administrative</option>
+                    <option value="others">Others</option>
+                </select>
+            </div>
+
+            <!-- Grievance Description Field -->
+            <div class="form-group">
+                <label for="complaint_description">Description:</label>
+                <textarea class="form-control" name="complaint_description" id="complaint_description" rows="4" required></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
+
+
+
+

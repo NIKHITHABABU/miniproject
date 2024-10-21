@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+    <header id="header" class="header d-flex align-items-center sticky-top">
+        
+{% load static %}
+      <div class="container-fluid container-xl position-relative d-flex align-items-center">
+  
+        <!-- <a href="index.html" class="logo d-flex align-items-center me-auto"> -->
+          <!-- Uncomment the line below if you also wish to use an image logo -->
+          <!-- <img src="../static/css/assets/img/indexlogo.jpg" alt=""> -->
+          <h1 class="sitename"></h1>
+        </a>
+        <a href="/" class="logo d-flex align-items-center">
+            <img src="../static/css/assets/img/indexlogoo.jpg" alt="" data-aos="fade-in">
+          </a>
+          
+          <!-- <link rel="stylesheet" href="{% static 'css/assets/css/style.css' %}"> -->
+
+        <nav id="navmenu" class="ms-auto navmenu">
+          <ul>
+            <li><a href="addcomplaint">Events</a></li>
+              <!-- <ul>
+              </li>
+              <li><a href="addcomplaint">Add complaints</a></li>
+              <li><a href="facreg">Edit/delete complaints</a></li>
+               <li><a href="adminreg">Admin Registration</a></li> -->
+            <!-- </ul>            </li>   -->
+          
+            <li><a href="about">Comments</a></li>
+            <!-- <li><a href="courses.html">Courses</a></li> -->
+            <li><a href="feedbacktemplate"> Grievance</a></li>
+           
+            <!-- <li><a href="events.html">communication</a></li> -->
+            <!-- <li><a href="contact.html">Contact</a></li> -->
+            <!-- <li><a href="pricing.html">Pricing</a></li> -->
+         
+                <!-- <li><a href="#">Dropdown 1</a></li> -->
+                <!-- <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a> -->
+                  <!-- <ul> -->
+                    <!-- <li><a href="#">Deep Dropdown 1</a></li>
+                    <li><a href="#">Deep Dropdown 2</a></li>
+                    <li><a href="#">Deep Dropdown 3</a></li>
+                    <li><a href="#">Deep Dropdown 4</a></li>
+                    <li><a href="#">Deep Dropdown 5</a></li>
+                  </ul> -->
+                
+            <li><a href="login">Logout</a></li>
+          </ul>
+          
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+  
+        <a class="btn-getstarted" href="courses.html">Get Started</a>
+  
+      </div>
+    </header>
+  
+    <main class="main">
+  
+      <!-- Hero Section -->
+      <section id="hero" class="hero section dark-background">
+  
+        <img src="../static/css/assets/img/studenthomecover.jpg" alt="" data-aos="fade-in">
+  
+        <div class="container">
+          <h2 data-aos="fade-up" data-aos-delay="100">Mentorship fosters a supportive environment..</h2>
+ 
+  
+      </section>
+     
+      <section id="why-us" class="section why-us">
+  
+        <div class="container">
+  
+          <div class="row gy-4">
+  
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+              <div class="why-box">
+                <h3>Why Student Grievance Redressal Cell</h3>
+                <p>
+                  A Student Grievance Redressal Cell serves as a dedicated platform for addressing and resolving concerns and complaints raised by students. It ensures that grievances related to academic, administrative, or personal issues are handled in a timely and fair manner, fostering a supportive and transparent environment within educational institutions.
+                </p>
+                <div class="text-center">
+                  <a href="#" class="more-btn"><span>Learn More</span> <i class="bi bi-chevron-right"></i></a>
+                </div>
+              </div>
+            </div>
+  
+            <div class="col-lg-8 d-flex align-items-stretch">
+              <div class="row gy-4" data-aos="fade-up" data-aos-delay="200">
+  
+                <div class="col-xl-4">
+                  <div class="icon-box d-flex flex-column justify-content-center align-items-center">
+                    <i class="bi bi-clipboard-data"></i>
+                    <h4>Advocacy</h4>
+                    <p>Ensures that students' voices are heard and their concerns are addressed fairly and promptly.</p>
+                  </div>
+                </div> 
+   
+                 <div class="col-xl-4" data-aos="fade-up" data-aos-delay="300">
+                  <div class="icon-box d-flex flex-column justify-content-center align-items-center">
+                    <i class="bi bi-gem"></i>
+                    <h4>Resolution</h4>
+                    <p>Facilitates effective and timely solutions to student complaints and issues.</p>
+                  </div>
+                </div>
+
+                <div class="col-xl-4" data-aos="fade-up" data-aos-delay="400">
+                  <div class="icon-box d-flex flex-column justify-content-center align-items-center">
+                    <i class="bi bi-inboxes"></i>
+                    <h4>Equity</h4>
+                    <p>Guarantees that all students receive fair and unbiased consideration of their concerns and issues</p>
+                  </div>
+                  </div>  
+               </div>
+            </div>
+  
+          </div>
+  
+        </div>
+  
+       </section>
+  
+          <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 Student Grievance Redressal Cell. All rights reserved.</p>
+            <ul class="footer-links">
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </div>
+    </footer>
+    
+    </footer> 
+  
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  
+    <!-- Preloader -->
+    <div id="preloader"></div>
+  
+   
+
+  
+{% endblock %}
+
