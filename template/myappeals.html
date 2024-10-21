@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Appeals</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <style>
+        body {
+            background-color: #e6f2ff; /* Light blue background */
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            text-align: center;
+            width: 100%;
+        }
+        h1 {
+            color: #4a90e2; /* Blue color for heading */
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        thead {
+            background-color: #4a90e2; /* Blue header background */
+            color: white;
+        }
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+        td {
+            background-color: #f0f8ff; /* Light blue for table rows */
+        }
+        tbody tr:hover {
+            background-color: #cce7ff; /* Darker blue on hover */
+        }
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            th, td {
+                padding: 10px;
+                font-size: 14px;
+            }
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>My Appeals</h1>
+
+        <div class="table-container">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Nature of Appeal</th>
+                        <th>Details of Appeal</th>
+                        <th>Appeal Resolution</th>
+                        <th>Status</th> <!-- Added Status Column -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for appeal in appeals %}
+                    <tr>
+                        <td>{{ appeal.nature_of_appeal }}</td>
+                        <td>{{ appeal.details_of_appeal }}</td>
+                        <td>{{ appeal.appealresolution }}</td>
+                        <td>
+                            {% if appeal.appealresolution %}
+                                Resolved
+                            {% else %}
+                                Unresolved
+                            {% endif %}
+                        </td> <!-- Status logic based on resolution -->
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

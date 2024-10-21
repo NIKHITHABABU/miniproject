@@ -1,34 +1,40 @@
 <!DOCTYPE html>
-<!-- coding by helpme_coder -->
 <html>
 
 <head>
     {% load static %}
-    
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login Form</title>
     <link rel="stylesheet" href="{% static 'css/assets/css/style2.css' %}" />
 </head>
-</head>
+
 <body>
     <div class="container">
+
+        <!-- This will check for any messages (like error or success) -->
+        {% if messages %}
+            {% for message in messages %}
+            <script>
+                alert("{{ message }}");  // Display the message in an alert box
+            </script>
+            {% endfor %}
+        {% endif %}
+
         <form action="{% url 'login' %}" method="POST">
             {% csrf_token %}
             <h2>LOGIN</h2>
 
             <!-- Email Field -->
             <div class="input-field">
-                <input type="text" name="mail" required />  <!-- Matching id -->
-                <label>Enter email</label>  <!-- Associated label -->
-               
+                <input type="text" name="mail" required />
+                <label>Enter email</label>
             </div>
 
             <!-- Password Field -->
             <div class="input-field">
-                <input type="password" name="password" required />  <!-- Matching id -->
-                <label>Enter password</label>  <!-- Associated label -->
-               
+                <input type="password" name="password" required />
+                <label>Enter password</label>
             </div>
 
             <div class="forget">
@@ -36,12 +42,14 @@
                     <input type="checkbox" id="Save-login" />
                     <p>Save login information</p>
                 </label>
-                <a href="#">Forgot password?</a>
+                <a href="{% url 'forget' %}">Forgot password?</a>
             </div>
 
             <button type="submit">Log In</button>
+
             <div class="Create-account">
-                <p>Not Registered yet? <a href="reg">Click here!</a></p>
+                <!-- Button or link to return to the home page -->
+                <a href="{% url 'index' %}" class="back-button">Return to Home Page</a>
             </div>
         </form>
     </div>

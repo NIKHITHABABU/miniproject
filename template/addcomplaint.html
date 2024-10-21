@@ -38,12 +38,28 @@
 <body>
     <div class="container mt-5">
         <h2 class="text-center">Submit Your Grievance</h2>
-        <form method="POST">
+        <form id="grievanceForm" method="POST">
             {% csrf_token %}
+            
+            <!-- Name Field (Optional) -->
+            <div class="form-group">
+                <label for="name">Name (Optional):</label>
+                <input type="text" class="form-control" name="name" id="name">
+            </div>
+
+            <!-- Department Field (Optional) -->
+            <div class="form-group">
+                <label for="department">Department (Optional):</label>
+                <input type="text" class="form-control" name="department" id="department" pattern="[A-Za-z\s]+" title="Only alphabets allowed">
+            </div>
+
+            <!-- Grievance Title Field -->
             <div class="form-group">
                 <label for="complaint_title">Grievance Title:</label>
                 <input type="text" class="form-control" name="complaint_title" id="complaint_title" required>
             </div>
+
+            <!-- Grievance Type Field -->
             <div class="form-group">
                 <label for="type_of_grievance">Grievance Type:</label>
                 <select class="form-control" name="type_of_grievance" id="type_of_grievance" required>
@@ -52,12 +68,29 @@
                     <option value="others">Others</option>
                 </select>
             </div>
+
+            <!-- Grievance Description Field -->
             <div class="form-group">
                 <label for="complaint_description">Description:</label>
                 <textarea class="form-control" name="complaint_description" id="complaint_description" rows="4" required></textarea>
             </div>
+
+            <!-- Submit Button -->
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
+
+    <!-- JavaScript to show pop-up after form submission -->
+    <script>
+        document.getElementById('grievanceForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting immediately
+
+            // Display pop-up message
+            alert("Grievances submitted successfully");
+
+            // Submit the form after displaying the alert
+            this.submit();
+        });
+    </script>
 </body>
 </html>

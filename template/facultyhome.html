@@ -22,7 +22,7 @@
 
         <nav id="navmenu" class="ms-auto navmenu">
           <ul>
-            <li><a href="addcomplaint">Events</a></li>
+            <li><a href="events">Events</a></li>
               <!-- <ul>
               </li>
               <li><a href="addcomplaint">Add complaints</a></li>
@@ -30,9 +30,9 @@
                <li><a href="adminreg">Admin Registration</a></li> -->
             <!-- </ul>            </li>   -->
           
-            <li><a href="about">Comments</a></li>
+            <!-- <li><a href="about">Comments</a></li> -->
             <!-- <li><a href="courses.html">Courses</a></li> -->
-            <li><a href="feedbacktemplate"> Grievance</a></li>
+            <li><a href="assignedgrievance"> Grievance</a></li>
            
             <!-- <li><a href="events.html">communication</a></li> -->
             <!-- <li><a href="contact.html">Contact</a></li> -->
@@ -48,7 +48,7 @@
                     <li><a href="#">Deep Dropdown 5</a></li>
                   </ul> -->
                 
-            <li><a href="login">Logout</a></li>
+                  <a href="{% url 'facultylogout' %}" >Logout</a>
           </ul>
           
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -64,7 +64,7 @@
       <!-- Hero Section -->
       <section id="hero" class="hero section dark-background">
   
-        <img src="../static/css/assets/img/studenthomecover.jpg" alt="" data-aos="fade-in">
+        <img src="../static/css/assets/img/facultybg.jpg" alt="" data-aos="fade-in">
   
         <div class="container">
           <h2 data-aos="fade-up" data-aos-delay="100">Mentorship fosters a supportive environment..</h2>

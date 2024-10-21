@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appeal Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e6f7ff; /* Light blue background */
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full height */
+        }
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: white; /* White background for the form */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+        .container:hover {
+            transform: scale(1.02); /* Slight zoom effect on hover */
+        }
+        h2 {
+            text-align: center;
+            color: #4a90e2; /* Blue heading */
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333; /* Dark gray for labels */
+        }
+        select, textarea, input[type="file"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        select:focus, textarea:focus {
+            border-color: #4a90e2; /* Blue border on focus */
+            outline: none;
+            box-shadow: 0 0 5px rgba(74, 144, 226, 0.5); /* Glow effect */
+        }
+        button {
+            background-color: #4a90e2; /* Blue button */
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #357ABD; /* Darker blue on hover */
+        }
+        button:active {
+            background-color: #2A5E8B; /* Even darker blue when clicked */
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            h2 {
+                font-size: 22px;
+            }
+            button {
+                padding: 10px;
+            }
+        }
+    </style>
+    <script>
+        function validateForm() {
+            var natureOfAppeal = document.getElementById('nature_of_appeal').value;
+            var detailsOfAppeal = document.getElementById('details_of_appeal').value;
+            var proposedAction = document.getElementById('proposed_action').value;
+
+            if (!natureOfAppeal || !detailsOfAppeal || !proposedAction) {
+                alert('Please fill in all required fields.');
+                return false; // Prevent form submission
+            }
+
+            // Display the pop-up message immediately when the form is valid
+            alert('Appeal submitted successfully!');
+
+            // Return true to allow the form submission to proceed
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Submit an Appeal</h2>
+        <form method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+            {% csrf_token %}
+            
+            <label for="nature_of_appeal">Nature of Appeal:</label>
+            <select name="nature_of_appeal" id="nature_of_appeal" required>
+                <option value="">--Select--</option>
+                <option value="administrative">Administrative</option>
+                <option value="academic">Academic</option>
+                <option value="student_support">Student Support</option>
+                <option value="others">Others</option>
+            </select>
+
+            <label for="details_of_appeal">Details of Appeal:</label>
+            <textarea name="details_of_appeal" id="details_of_appeal" rows="4" required></textarea>
+
+            <label for="proposed_action">Proposed Action:</label>
+            <textarea name="proposed_action" id="proposed_action" rows="4" required></textarea>
+
+            <label for="supporting_documents">Supporting Documents:</label>
+            <input type="file" name="supporting_documents" id="supporting_documents">
+
+            <label for="signature">Signature:</label>
+            <input type="file" name="signature" id="signature">
+
+            <button type="submit">Submit Appeal</button>
+        </form>
+    </div>
+</body>
+</html>

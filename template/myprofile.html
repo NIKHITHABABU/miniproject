@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile & Grievances</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f7f8fa;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .profile-header {
+            background-color: #d4edda; /* Light green background */
+            color: black;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .profile-header h2 {
+            font-size: 32px;
+            font-weight: bold;
+        }
+        .grievances-section {
+            margin-top: 40px;
+        }
+        .table {
+            margin-top: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        .thead-dark {
+            background-color: #343a40;
+            color: white;
+        }
+        .table td, .table th {
+            text-align: center;
+            vertical-align: middle;
+        }
+        .resolution-input {
+            width: 100%;
+            border-radius: 5px;
+        }
+        .resolution-btn {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .resolution-btn button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .resolution-btn button:hover {
+            background-color: #218838;
+        }
+        .form-container {
+            margin-top: 40px;
+        }
+        @media (max-width: 768px) {
+            .profile-header h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Profile Header -->
+    <!-- <div class="profile-header">
+        <h2>Welcome {{ user.name }}</h2>
+    </div> -->
+    
+    <!-- Grievances List Section -->
+    <div class="grievances-section">
+        <h3 class="text-center">Your Submitted Grievances</h3>
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <!-- <th>Department</th> -->
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Resolution</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for grievance in grievances %}
+                <tr>
+                    <!-- <td>{{ grievance.department }}</td> -->
+                    <td>{{ grievance.complaint_title }}</td>
+                    <td>{{ grievance.get_type_of_grievance_display }}</td>
+                    <td>{{ grievance.complaint_description }}</td>
+                    <td>
+                        {% if grievance.resolution %}
+                            {{ grievance.resolution }}
+                        {% else %}
+                            <!-- Show resolution input if no resolution is provided -->
+                            <div class="form-container">
+                                <form method="POST" action="">
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>{{ grievance.resolution }}</p>
+                                        </div>
+                                    </div>
+                                    
+                                </form>
+                            </div>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if grievance.resolution %}
+                            Resolved
+
+                            {% else %}
+
+                            Not resolved
+
+                            {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

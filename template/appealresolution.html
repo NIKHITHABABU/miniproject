@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appeal Resolution</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <style>
+        body {
+            background-color: #ffffff; /* White background */
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            max-width: 1000px;
+            width: 100%;
+        }
+        h1 {
+            background-color: #80bfff; /* Mild blue header */
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 28px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        table {
+            width: 100%;
+            margin-top: 30px;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #dddddd;
+        }
+        th {
+            background-color: #80bfff; /* Mild blue for table headers */
+            color: #fff;
+            font-size: 18px;
+            text-transform: uppercase;
+        }
+        td {
+            background-color: #f0f8ff; /* Very light blue for table rows */
+            font-size: 16px;
+        }
+        textarea {
+            resize: none;
+        }
+        .btn-submit {
+            background-color: #99ccff; /* Mild blue button */
+            border: 1px solid #80bfff;
+            color: #333;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            padding: 8px 12px;
+            font-size: 14px;
+        }
+        .btn-submit:hover {
+            background-color: #80bfff; /* Darker blue on hover */
+            color: #0056b3;
+        }
+        .alert {
+            display: none;
+        }
+        .resolution-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .resolution-box textarea {
+            width: 100%;
+            border-radius: 5px;
+            padding: 8px;
+        }
+        .resolution-box form {
+            width: 100%;
+        }
+        .resolution-box p {
+            font-size: 16px;
+            color: #80bfff;
+            font-weight: bold;
+        }
+        .file-links {
+            text-align: center;
+        }
+        .file-links a {
+            color: #007bff;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+        .text-success {
+            color: #80bfff;
+        }
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #e6f2ff; /* Light blue for alternating rows */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Appeal Resolution</h1>
+
+        <!-- Success alert message -->
+        <div class="alert alert-success center-text" id="successAlert">
+            Resolution submitted successfully!
+        </div>
+
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Nature of Appeal</th>
+                    <th>Details</th>
+                    <th>Proposed Action</th>
+                    <th>Signature</th>
+                    <th>Supporting Documents</th>
+                    <th>Resolution</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for appeal in appeals %}
+                <tr>
+                    <td>{{ appeal.nature_of_appeal }}</td>
+                    <td>{{ appeal.details_of_appeal }}</td>
+                    <td>{{ appeal.proposed_action }}</td>
+                    <td>
+                        {% if appeal.signature %}
+                            <a href="{{ appeal.signature.url }}" target="_blank">View Signature</a>
+                        {% else %}
+                            No Signature Uploaded
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if appeal.supporting_documents %}
+                            <a href="{{ appeal.supporting_documents.url }}" target="_blank">View Document</a>
+                        {% else %}
+                            No Document Uploaded
+                        {% endif %}
+                    </td>
+                    <td>
+                        <div class="resolution-box">
+                            {% if appeal.appealresolution %}
+                                <p class="text-success">{{ appeal.appealresolution }}</p>
+                            {% else %}
+                                <form method="POST" onsubmit="showSuccessMessage(event)">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="appeal_id" value="{{ appeal.id }}">
+                                    <textarea name="appealresolution" class="form-control" rows="3" placeholder="Enter resolution" required></textarea>
+                                    <button type="submit" class="btn btn-submit mt-2">Submit Resolution</button>
+                                </form>
+                            {% endif %}
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function showSuccessMessage(event) {
+            event.preventDefault(); // Stop the form from submitting instantly
+            document.getElementById('successAlert').style.display = 'block'; // Show the alert
+            setTimeout(function() {
+                event.target.submit(); // Submit the form after the alert is shown
+                alert("Resolution submitted successfully!"); // Show the pop-up after submission
+            }, 1500); // Delay for 1.5 seconds
+        }
+    </script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
